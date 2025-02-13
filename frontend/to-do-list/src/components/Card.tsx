@@ -11,16 +11,18 @@ const Card = (props: Task) => {
   };
 
   return (
-    <div className="rounded-xl bg-slate-800 shadow shadow-gray-800 p-8">
+    <div className="rounded-xl bg-slate-800 shadow shadow-gray-800 p-8 w-full">
       <div className="flex flex-col gap-3 text-center">
         <div className="flex flex-row gap-3 justify-end">
           <IconButton icon={<FaEdit />} />
           <IconButton icon={<AiFillDelete />} />
         </div>
         <h1 className="font-mono text-2xl font-bold">{props.title}</h1>
-        <p className="font-mono text-justify p-5 line-clamp-5 h-35 bg-slate-700 rounded-xl">
-          <b className="underline">Descripción:</b> {props.description}
-        </p>
+        <div className="font-mono text-justify bg-slate-700 rounded-xl max-h-36 min-h-24">
+          <div className="m-6 line-clamp-4">
+            <b className="underline">Descripción:</b> {props.description ?? "No hay descripción."}
+          </div>
+        </div>
         <div
           className={`font-mono font-semibold w-fit p-2 rounded-xl cursor-pointer hover:scale-110 transition-all ${
             statusStyles[props.status]
@@ -31,12 +33,12 @@ const Card = (props: Task) => {
         <div className="text-end font-semibold">
           <div>
             <u>Creado:</u> {props.createdAt.getDate()}/
-            {props.createdAt.getMonth()+1}/{props.createdAt.getFullYear()}
+            {props.createdAt.getMonth() + 1}/{props.createdAt.getFullYear()}
           </div>
           {props.updatedAt ? (
             <div>
               <u>Última actualización:</u> {props.updatedAt.getDate()}/
-              {props.updatedAt.getMonth()+1}/{props.updatedAt.getFullYear()}
+              {props.updatedAt.getMonth() + 1}/{props.updatedAt.getFullYear()}
             </div>
           ) : (
             <></>

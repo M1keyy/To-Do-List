@@ -12,8 +12,6 @@ const tasks: Task[] = [
   {
     id: "1",
     title: "Task 2",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit aut, dolorum voluptatibus placeat corporis illum ducimus, aliquid fuga suscipit provident laudantium minus soluta consectetur, corrupti deserunt earum nostrum. Amet, autem?",
     status: "pending",
     createdAt: new Date(2024, 11, 12),
     updatedAt: new Date(2025, 0, 12),
