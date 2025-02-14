@@ -6,7 +6,7 @@ import sequelize from "./configs/datablase";
 dotenv.config();
 
 const app: Express = express();
-const PORT: string = process.env.PORT || "3000";
+const PORT: string = process.env.PORT || "8080";
 
 app.use(express.json());
 
