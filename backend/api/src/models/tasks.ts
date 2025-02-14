@@ -29,8 +29,7 @@ export class Task extends Model {
     type: DataType.STRING,
     allowNull: true,
     validate: {
-      notEmpty: true,
-      len: [0, 20],
+      len: [0, 500],
     },
   })
   description?: string;

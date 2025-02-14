@@ -26,11 +26,8 @@ app.get("/tasks/:id", async (req: Request, res: Response) => {
     const { id } = req.params;
     const task: Task | null = await Task.findByPk(id);
 
-    if (!task) {
-      res.status(404).json({ Error: "Tarea no encontrada" });
-    } else {
-      res.status(200).json(task);
-    }
+    task ?? res.status(404).json({ Error: "Tarea no encontrada" });
+    res.status(200).json(task);
   } catch (e) {
     console.log(e);
     res.status(500).json({ Error: "Error al obtener la tarea." });
@@ -49,6 +46,21 @@ app.post("/tasks", async (req: Request, res: Response) => {
 });
 
 // PUT /tasks/:id → Actualizar una tarea existente.
+app.put("/tasks/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { title, description, status } = req.body;
+    const task: Task | null = await Task.findByPk(id);
+    
+    task ?? res.status(404).json({ Error: "Tarea no encontrada." });
+    await task?.update({ title, description, status });
+    res.status(201).json(task);
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({ Error: "Error al actualizar la tarea" });
+  }
+});
+
 // DELETE /tasks/:id → Eliminar una tarea.
 
 sequelize.sync({ alter: true }).then(() => {
