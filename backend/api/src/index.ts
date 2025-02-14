@@ -16,8 +16,13 @@ app.get("/", (req: Request, res: Response) => {
 
 // GET /tasks → Obtener todas las tareas.
 app.get("/tasks", async (req: Request, res: Response) => {
-  const tasks: Task[] = await Task.findAll();
-  res.status(200).json(tasks);
+  try {
+    const tasks: Task[] = await Task.findAll();
+    res.status(200).json(tasks);
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({ Error: "Error al obtener tareas." });
+  }
 });
 
 // GET /tasks/:id → Obtener una tarea específica.
