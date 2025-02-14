@@ -32,17 +32,9 @@ const Card = (props: Task) => {
         </div>
         <div className="text-end font-semibold">
           <div>
-            <u>Creado:</u> {props.createdAt.getDate()}/
-            {props.createdAt.getMonth() + 1}/{props.createdAt.getFullYear()}
+            <u>Creado:</u> {String(props.createdAt)}
           </div>
-          {props.updatedAt ? (
-            <div>
-              <u>Última actualización:</u> {props.updatedAt.getDate()}/
-              {props.updatedAt.getMonth() + 1}/{props.updatedAt.getFullYear()}
-            </div>
-          ) : (
-            <></>
-          )}
+          {String(props.updatedAt)}
         </div>
       </div>
     </div>
