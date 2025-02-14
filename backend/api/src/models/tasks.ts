@@ -18,12 +18,20 @@ export class Task extends Model {
   @Column({
     type: DataType.STRING,
     allowNull: false,
+    validate: {
+      notEmpty: true,
+      len: [0, 20],
+    },
   })
   title!: string;
 
   @Column({
     type: DataType.STRING,
     allowNull: true,
+    validate: {
+      notEmpty: true,
+      len: [0, 20],
+    },
   })
   description?: string;
 
@@ -31,12 +39,23 @@ export class Task extends Model {
     type: DataType.ENUM(...Object.values(status)),
     allowNull: false,
     defaultValue: status.pending,
+    validate: {
+      isIn: [[status.completed, status.in_progress, status.pending]],
+    },
   })
   status!: status;
 
-  @Column({ type: DataType.DATE, defaultValue: DataType.NOW })
+  @Column({
+    type: DataType.DATE,
+    defaultValue: DataType.NOW,
+    validate: { isDate: true },
+  })
   createdAt!: Date;
 
-  @Column({ type: DataType.DATE, defaultValue: DataType.NOW })
+  @Column({
+    type: DataType.DATE,
+    defaultValue: DataType.NOW,
+    validate: { isDate: true },
+  })
   updatedAt!: Date;
 }
