@@ -51,7 +51,7 @@ app.put("/tasks/:id", async (req: Request, res: Response) => {
     const { id } = req.params;
     const { title, description, status } = req.body;
     const task: Task | null = await Task.findByPk(id);
-    
+
     task ?? res.status(404).json({ Error: "Tarea no encontrada." });
     await task?.update({ title, description, status });
     res.status(201).json(task);
@@ -62,6 +62,19 @@ app.put("/tasks/:id", async (req: Request, res: Response) => {
 });
 
 // DELETE /tasks/:id → Eliminar una tarea.
+app.delete("/tasks/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const task: Task | null = await Task.findByPk(id);
+
+    task ?? res.status(404).json({ Error: "Tarea no encontrada." });
+    await task?.destroy();
+    res.status(200).json(task);
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({ Error: "Error al eliminar la tarea." });
+  }
+});
 
 sequelize.sync({ alter: true }).then(() => {
   console.log("Base de datos conectada 🚀");
