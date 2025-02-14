@@ -1,9 +1,5 @@
-import { API_URL } from "../configs/envConfig";
+import fetcher from "../utils/fetcher";
 
-const fetchTasks = async () => {
-  const res = await fetch(`${API_URL}/tasks`);
-  if (!res.ok) throw new Error("Error al obtener las tareas");
-  return res.json();
-};
+const fetchTasks = () => fetcher("/tasks");
 
 export default fetchTasks;
