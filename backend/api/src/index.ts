@@ -2,11 +2,19 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import { Task } from "./models/tasks";
 import sequelize from "./configs/datablase";
+import cors from "cors";
 
 dotenv.config();
 
 const app: Express = express();
 const PORT: string = process.env.PORT || "8080";
+app.use(
+  cors({
+    origin: process.env.CONSUMER,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.use(express.json());
 
