@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
 import dotenv from "dotenv";
+import { Task } from "../models/tasks";
 
 dotenv.config();
 
@@ -9,7 +10,7 @@ const sequelize = new Sequelize({
   password: process.env.DB_PASS,
   host: process.env.DB_HOST,
   dialect: "postgres",
-  models: [/* Agregar modelo cuando esté listo */],
+  models: [Task],
   logging: false,
 });
 
