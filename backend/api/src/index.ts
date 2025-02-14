@@ -21,6 +21,22 @@ app.get("/tasks", async (req: Request, res: Response) => {
 });
 
 // GET /tasks/:id → Obtener una tarea específica.
+app.get("/tasks/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const task: Task | null = await Task.findByPk(id);
+
+    if (!task) {
+      res.status(404).json({ Error: "Tarea no encontrada" });
+    } else {
+      res.status(200).json(task);
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({ Error: "Error al obtener la tarea." });
+  }
+});
+
 // POST /tasks → Crear una nueva tarea.
 app.post("/tasks", async (req: Request, res: Response) => {
   try {
