@@ -4,6 +4,7 @@ const fetcher = async (endpoint: string, options: RequestInit = {}) => {
   try {
     const res = await fetch(`${API_URL}${endpoint}`, options);
     if (!res.ok) throw new Error(`Error ${res.status}`);
+    return res.json();
   } catch (e) {
     console.error("Fetch error: ", e);
     throw e;
