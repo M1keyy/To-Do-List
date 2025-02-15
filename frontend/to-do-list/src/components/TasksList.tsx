@@ -1,4 +1,3 @@
-import Task from "../interfaces/TaskInterface";
 import Card from "./Card";
 import { useTasks } from "../hooks/useTasks";
 
@@ -12,7 +11,7 @@ const TaskList = () => {
 
   return (
     <>
-      {tasks?.map((task: Task) => (
+      {tasks?.map((task) => (
         <Card
           key={task.id}
           id={task.id}
