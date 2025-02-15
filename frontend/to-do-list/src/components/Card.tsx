@@ -2,8 +2,12 @@ import Task from "../interfaces/TaskInterface";
 import IconButton from "./IconButton";
 import { FaEdit } from "react-icons/fa";
 import { AiFillDelete } from "react-icons/ai";
+import useDeleteTask from "../hooks/useDeleteTask";
 
 const Card = (props: Task) => {
+
+  const { mutateAsync: deleteTaskMutation } = useDeleteTask(props.id);
+
   const statusStyles: Record<string, string> = {
     completed: "bg-green-600",
     "in-progress": "bg-yellow-400 text-slate-800",
@@ -15,7 +19,7 @@ const Card = (props: Task) => {
       <div className="flex flex-col gap-3 text-center">
         <div className="flex flex-row gap-3 justify-end">
           <IconButton icon={<FaEdit />} />
-          <IconButton icon={<AiFillDelete />} />
+          <IconButton icon={<AiFillDelete onClick={() => deleteTaskMutation()} />} />
         </div>
         <h1 className="font-mono text-2xl font-bold">{props.title}</h1>
         <div className="font-mono text-justify bg-slate-700 rounded-xl max-h-36 min-h-24">

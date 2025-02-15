@@ -4,8 +4,6 @@ import { useTasks } from "../hooks/useTasks";
 const TaskList = () => {
   const { data: tasks, error, isLoading } = useTasks();
 
-  console.log(tasks);
-
   if(isLoading) return <div className="text-2xl">Loading...</div>
   if(error) return <div className="text-2xl">{error.message}</div>
 
