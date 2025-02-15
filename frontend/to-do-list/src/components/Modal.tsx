@@ -10,7 +10,7 @@ const Modal = (props: {
     <div
       onClick={props.onClose}
       className={`fixed flex inset-0 justify-center items-center transition-colors ${
-        props.open ? "visible bg-black/20" : "invisible"
+        props.open ? "visible bg-black/60" : "invisible"
       }`}
     >
       <div

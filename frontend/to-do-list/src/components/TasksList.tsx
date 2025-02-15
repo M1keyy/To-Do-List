@@ -1,15 +1,20 @@
 import Card from "./Card";
 import { useTasks } from "../hooks/useTasks";
 import Task from "../interfaces/TaskInterface";
+import { useMemo } from "react";
 
 const TaskList = () => {
   const { data: tasks, error, isLoading } = useTasks();
 
-  if(isLoading) return <div className="text-2xl">Loading...</div>
-  if(error) return <div className="text-2xl">{error.message}</div>
-
   // Para que las tareas se muestren de la más nueva a la más antigua
-  const tasksReverse: Task[] | undefined = tasks?.reverse(); // <--
+  // useMemo para que no se vuelva a repetir el reverse()
+  const tasksReverse: Task[] | undefined = useMemo(
+    () => (tasks?.reverse()),
+    [tasks]
+  );
+
+  if (isLoading) return <div className="text-2xl">Loading...</div>;
+  if (error) return <div className="text-2xl">{error.message}</div>;
 
   return (
     <>

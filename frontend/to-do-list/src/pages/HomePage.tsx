@@ -1,14 +1,11 @@
+import { useState } from "react";
 import AddButton from "../components/AddButton";
+import FormTask from "../components/FormTasks";
 import TaskList from "../components/TasksList";
-import useAddTask from "../hooks/useAddTask";
 
 const HomePage = () => {
-  const { mutateAsync: addTaskMutation } = useAddTask({
-    title: "TEST DESDE FRONT",
-    status: "pending",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga qui quis ipsa quibusdam consectetur impedit natus exercitationem assumenda corrupti. Nisi, numquam quaerat maiores nesciunt corporis autem beatae facere? Rerum, et.",
-  });
+
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
     <>
@@ -16,7 +13,8 @@ const HomePage = () => {
         <h1 className="font-bold font-mono text-5xl p-4 pt-10 w-full">
           To-Do List
         </h1>
-        <AddButton onClick={() => addTaskMutation()} />
+        <AddButton onClick={() => setOpen(true)} />
+        <FormTask open={open} onClose={() => setOpen(false)} />
         <TaskList />
       </div>
     </>

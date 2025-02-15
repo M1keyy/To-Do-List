@@ -53,7 +53,7 @@ const Card = (props: Task) => {
       </div>
       <Modal open={open} onClose={() => setOpen(false)}>
         <div className="h-64 justify-center items-center flex flex-col">
-          <div className="text-3xl font-mono grow items-center flex text-center p-6">
+          <div className="text-3xl font-mono grow items-center flex text-center px-12">
             ¿Quieres eliminar la tarea?
           </div>
           <div className="flex flex-row gap-4 p-2 w-full">
