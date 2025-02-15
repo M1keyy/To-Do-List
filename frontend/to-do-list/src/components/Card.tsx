@@ -20,7 +20,8 @@ const Card = (props: Task) => {
         <h1 className="font-mono text-2xl font-bold">{props.title}</h1>
         <div className="font-mono text-justify bg-slate-700 rounded-xl max-h-36 min-h-24">
           <div className="m-6 line-clamp-4">
-            <b className="underline">Descripción:</b> {props.description ?? "No hay descripción."}
+            <b className="underline">Descripción:</b>{" "}
+            {props.description ?? "No hay descripción."}
           </div>
         </div>
         <div
@@ -34,7 +35,9 @@ const Card = (props: Task) => {
           <div>
             <u>Creado:</u> {String(props.createdAt)}
           </div>
-          {String(props.updatedAt)}
+          <div>
+            <u>Última actualización:</u> {String(props.updatedAt)}
+          </div>
         </div>
       </div>
     </div>

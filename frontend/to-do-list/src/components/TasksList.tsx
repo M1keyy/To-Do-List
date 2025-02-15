@@ -3,11 +3,12 @@ import Card from "./Card";
 import { useTasks } from "../hooks/useTasks";
 
 const TaskList = () => {
-  const { data: tasks, isLoading } = useTasks();
+  const { data: tasks, error, isLoading } = useTasks();
 
   console.log(tasks);
 
-  if(isLoading) return <div>Loading...</div>
+  if(isLoading) return <div className="text-2xl">Loading...</div>
+  if(error) return <div className="text-2xl">{error.message}</div>
 
   return (
     <>
