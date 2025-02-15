@@ -3,9 +3,11 @@ import IconButton from "./IconButton";
 import { FaEdit } from "react-icons/fa";
 import { AiFillDelete } from "react-icons/ai";
 import useDeleteTask from "../hooks/useDeleteTask";
+import { useState } from "react";
+import Modal from "./Modal";
 
 const Card = (props: Task) => {
-
+  const [open, setOpen] = useState<boolean>(false);
   const { mutateAsync: deleteTaskMutation } = useDeleteTask(props.id);
 
   const statusStyles: Record<string, string> = {
@@ -19,7 +21,12 @@ const Card = (props: Task) => {
       <div className="flex flex-col gap-3 text-center">
         <div className="flex flex-row gap-3 justify-end">
           <IconButton icon={<FaEdit />} />
-          <IconButton icon={<AiFillDelete onClick={() => deleteTaskMutation()} />} />
+          <IconButton
+            icon={<AiFillDelete />}
+            onClick={() => {
+              setOpen(true);
+            }}
+          />
         </div>
         <h1 className="font-mono text-2xl font-bold">{props.title}</h1>
         <div className="font-mono text-justify bg-slate-700 rounded-xl max-h-36 min-h-24">
@@ -44,6 +51,27 @@ const Card = (props: Task) => {
           </div>
         </div>
       </div>
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <div className="h-64 justify-center items-center flex flex-col">
+          <div className="text-3xl font-mono grow items-center flex text-center p-6">
+            ¿Quieres eliminar la tarea?
+          </div>
+          <div className="flex flex-row gap-4 p-2 w-full">
+            <button
+              className="p-2 bg-slate-700 rounded-xl grow text-xl font-mono font-semibold"
+              onClick={() => setOpen(false)}
+            >
+              Cancelar
+            </button>
+            <button
+              className="p-2 bg-red-600 rounded-xl grow text-xl font-mono font-semibold"
+              onClick={() => deleteTaskMutation()}
+            >
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };
