@@ -20,7 +20,7 @@ const Modal = (props: {
         }`}
       >
         <button
-          className="absolute top-2 right-2 rounded-xl text-slate-200 bg-slate-800 hover:brightness-150"
+          className="absolute top-2 right-2 rounded-xl text-slate-200 bg-slate-800 hover:brightness-150 cursor-pointer transition-all"
           onClick={props.onClose}
         >
           <IoIosClose size={40}/>

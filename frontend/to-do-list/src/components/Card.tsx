@@ -58,13 +58,13 @@ const Card = (props: Task) => {
           </div>
           <div className="flex flex-row gap-4 p-2 w-full">
             <button
-              className="p-2 bg-slate-700 rounded-xl grow text-xl font-mono font-semibold"
+              className="p-2 bg-slate-700 rounded-xl grow text-xl font-mono font-semibold hover:brightness-150 cursor-pointer transition-all"
               onClick={() => setOpen(false)}
             >
               Cancelar
             </button>
             <button
-              className="p-2 bg-red-600 rounded-xl grow text-xl font-mono font-semibold"
+              className="p-2 bg-red-600 rounded-xl grow text-xl font-mono font-semibold hover:brightness-150 cursor-pointer transition-all"
               onClick={() => deleteTaskMutation()}
             >
               Eliminar
