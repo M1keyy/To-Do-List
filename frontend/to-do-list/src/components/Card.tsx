@@ -8,7 +8,7 @@ import Modal from "./Modal";
 
 const Card = (props: Task) => {
   const [open, setOpen] = useState<boolean>(false);
-  const { mutateAsync: deleteTaskMutation } = useDeleteTask(props.id);
+  const { mutateAsync: deleteTaskMutation } = useDeleteTask();
 
   const statusStyles: Record<string, string> = {
     completed: "bg-green-600",
@@ -58,14 +58,14 @@ const Card = (props: Task) => {
           </div>
           <div className="flex flex-row gap-4 p-2 w-full">
             <button
-              className="p-2 bg-slate-700 rounded-xl grow text-xl font-mono font-semibold hover:brightness-150 cursor-pointer transition-all"
+              className="p-2 bg-slate-700 rounded-xl grow text-2xl font-mono font-semibold hover:brightness-150 cursor-pointer transition-all"
               onClick={() => setOpen(false)}
             >
               Cancelar
             </button>
             <button
-              className="p-2 bg-red-600 rounded-xl grow text-xl font-mono font-semibold hover:brightness-150 cursor-pointer transition-all"
-              onClick={() => deleteTaskMutation()}
+              className="p-2 bg-red-600 rounded-xl grow text-2xl font-mono font-semibold hover:brightness-150 cursor-pointer transition-all"
+              onClick={() => deleteTaskMutation(props.id)}
             >
               Eliminar
             </button>
