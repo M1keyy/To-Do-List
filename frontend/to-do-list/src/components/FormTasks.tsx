@@ -19,6 +19,15 @@ const FormTask = (props: {
     props.defaultValues?.description?.length || 0
   );
 
+  // Elementos para input de status
+  const statusStyles: Record<string, string> = {
+    completed: "bg-green-600",
+    "in-progress": "bg-yellow-400 text-slate-800",
+    pending: "bg-red-600",
+  };
+
+  const [statusSelec, setStatusSelec] = useState<string>("pending");
+
   const {
     register,
     handleSubmit,
@@ -50,7 +59,8 @@ const FormTask = (props: {
     <Modal
       open={props.open}
       onClose={() => {
-        setDescLength(0);
+        setDescLength(props.defaultValues?.description?.length || 0);
+        setStatusSelec(props.defaultValues?.status || "pending");
         reset();
         props.onClose();
       }}
@@ -118,13 +128,38 @@ const FormTask = (props: {
             <div className="text-red-300">{errors.description.message}</div>
           )}
           <label className="font-mono text-2xl font-semibold">Estado:</label>
-          <input
-            {...register("status", {
-              required: "El estado es requerido",
-            })}
-            type="text"
-            placeholder="Estado"
-          />
+          <div>
+            <div className="flex gap-4">
+              {["pending", "in-progress", "completed"].map((status) => (
+                <label
+                  key={status}
+                  className="flex items-center gap-2 cursor-pointer"
+                >
+                  <input
+                    type="radio"
+                    {...register("status", {
+                      required: "El estado es requerido",
+                    })}
+                    value={status}
+                    className="hidden"
+                    defaultValue={props.defaultValues?.status}
+                  />
+                  <span
+                    className={`px-4 py-2 font-mono brightness-75 text-xl rounded-xl transition-all ${
+                      statusStyles[status]
+                    } ${
+                      statusSelec === status
+                        ? "brightness-150 border-2 border-slate-200"
+                        : ""
+                    }`}
+                    onClick={() => setStatusSelec(status)}
+                  >
+                    {status}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </div>
           {errors.status && (
             <div className="text-red-300">{errors.status.message}</div>
           )}
@@ -134,7 +169,8 @@ const FormTask = (props: {
             className="p-2 bg-slate-700 rounded-xl grow text-2xl font-mono font-semibold hover:brightness-150 cursor-pointer transition-all"
             disabled={isSubmitting}
             onClick={() => {
-              setDescLength(0);
+              setDescLength(props.defaultValues?.description?.length || 0);
+              setStatusSelec(props.defaultValues?.status || "pending");
               reset();
               props.onClose();
             }}
