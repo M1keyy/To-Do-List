@@ -150,9 +150,9 @@ const FormTask = (props: {
           )}
           <label className="font-mono text-2xl font-semibold">Estado:</label>
           <div>
-            <div className="flex gap-4">
+            <div className="flex sm:flex-row not-sm:flex-col gap-4">
               {["pending", "in-progress", "completed"].map((status) => (
-                <label
+                <div
                   key={status}
                   className="flex items-center gap-2 cursor-pointer"
                 >
@@ -176,7 +176,7 @@ const FormTask = (props: {
                   >
                     {status}
                   </span>
-                </label>
+                </div>
               ))}
             </div>
           </div>
