@@ -31,7 +31,7 @@ const Card = (props: Task) => {
           />
         </div>
         <h1 className="font-mono text-2xl font-bold">{props.title}</h1>
-        <div className="font-mono text-justify bg-slate-700 rounded-xl max-h-fit min-h-24">
+        <div className="font-mono text-left bg-slate-700 rounded-xl max-h-fit min-h-24">
           <div className="m-6 line-clamp-24 whitespace-pre-line">
             <b className="underline">Descripción:</b>
             <br />
