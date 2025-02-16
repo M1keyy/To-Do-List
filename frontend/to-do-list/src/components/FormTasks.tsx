@@ -122,13 +122,20 @@ const FormTask = (props: {
             <textarea
               className="w-full grow p-4 bg-slate-700 rounded-t-2xl h-full"
               {...register("description", {
-                maxLength: {
-                  value: 500,
-                  message:
-                    "La descripción no puede tener más de 500 caracteres",
+                validate: () => {
+                  /* Se checa con validate en vez de maxLength porque
+                     con descLenth tenemos la longitud real, ya que también
+                     calculamos los ENTER como doble en el onChange */
+                  if (descLength <= 500) return true;
+                  return "La descripción no puede tener más de 500 caracteres";
                 },
               })}
-              onChange={(input) => setDescLength(input.target.value.length)}
+              onChange={(input) => {
+                const value = input.target.value;
+                const adjustedLength =
+                  value.length + (value.match(/\n/g)?.length || 0);
+                setDescLength(adjustedLength);
+              }}
               placeholder="Describe tu tarea"
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
