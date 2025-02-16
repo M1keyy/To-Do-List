@@ -46,7 +46,12 @@ const FormTask = (props: {
     data
   ) => {
     try {
-      await props.mutationFn(data).then(() => props.onClose());
+      await props.mutationFn(data).then(() => {
+        setDescLength(props.defaultValues?.description?.length || 0);
+        setStatusSelec(props.defaultValues?.status || "pending");
+        reset();
+        props.onClose();
+      });
     } catch (e) {
       console.error(e);
       setError("root", {
