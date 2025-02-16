@@ -159,7 +159,7 @@ const FormTask = (props: {
           <div>
             <div className="flex sm:flex-row not-sm:flex-col gap-4">
               {["pending", "in-progress", "completed"].map((status) => (
-                <div
+                <label
                   key={status}
                   className="flex items-center gap-2 cursor-pointer"
                 >
@@ -183,7 +183,7 @@ const FormTask = (props: {
                   >
                     {status}
                   </span>
-                </div>
+                </label>
               ))}
             </div>
           </div>
