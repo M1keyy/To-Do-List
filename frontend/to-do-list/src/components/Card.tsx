@@ -5,10 +5,14 @@ import { AiFillDelete } from "react-icons/ai";
 import useDeleteTask from "../hooks/useDeleteTask";
 import { useState } from "react";
 import Modal from "./Modal";
+import FormTask from "./FormTasks";
+import useEditTask from "../hooks/useEditTask";
 
 const Card = (props: Task) => {
-  const [open, setOpen] = useState<boolean>(false);
+  const [openDelete, setOpenDelete] = useState<boolean>(false);
+  const [openEdit, setOpenEdit] = useState<boolean>(false);
   const { mutateAsync: deleteTaskMutation } = useDeleteTask();
+  const { mutateAsync: editTaskMutation } = useEditTask();
 
   const statusStyles: Record<string, string> = {
     completed: "bg-green-600",
@@ -20,12 +24,10 @@ const Card = (props: Task) => {
     <div className="rounded-xl bg-slate-800 shadow shadow-gray-800 p-8 w-full">
       <div className="flex flex-col gap-3 text-center">
         <div className="flex flex-row gap-3 justify-end">
-          <IconButton icon={<FaEdit />} />
+          <IconButton icon={<FaEdit />} onClick={() => setOpenEdit(true)} />
           <IconButton
             icon={<AiFillDelete />}
-            onClick={() => {
-              setOpen(true);
-            }}
+            onClick={() => setOpenDelete(true)}
           />
         </div>
         <h1 className="font-mono text-2xl font-bold">{props.title}</h1>
@@ -54,7 +56,7 @@ const Card = (props: Task) => {
           </div>
         </div>
       </div>
-      <Modal open={open} onClose={() => setOpen(false)}>
+      <Modal open={openDelete} onClose={() => setOpenDelete(false)}>
         <div className="h-64 justify-center items-center flex flex-col">
           <div className="text-3xl font-mono grow items-center flex text-center px-12">
             ¿Quieres eliminar la tarea?
@@ -62,7 +64,7 @@ const Card = (props: Task) => {
           <div className="flex flex-row gap-4 p-2 w-full">
             <button
               className="p-2 bg-slate-700 rounded-xl grow text-2xl font-mono font-semibold hover:brightness-150 cursor-pointer transition-all"
-              onClick={() => setOpen(false)}
+              onClick={() => setOpenDelete(false)}
             >
               Cancelar
             </button>
@@ -75,6 +77,13 @@ const Card = (props: Task) => {
           </div>
         </div>
       </Modal>
+      <FormTask
+        open={openEdit}
+        onClose={() => setOpenEdit(false)}
+        mutationFn={editTaskMutation}
+        defaultValues={props}
+        editing
+      />
     </div>
   );
 };

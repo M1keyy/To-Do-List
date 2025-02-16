@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import Modal from "./Modal";
 import Task from "../interfaces/TaskInterface";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UseMutateAsyncFunction } from "@tanstack/react-query";
 
 const FormTask = (props: {
@@ -10,10 +10,11 @@ const FormTask = (props: {
   mutationFn: UseMutateAsyncFunction<
     any,
     Error,
-    Omit<Task, "createdAt" | "updatedAt" | "id">,
+    Omit<Task, "createdAt" | "updatedAt">,
     unknown
   >;
   defaultValues?: Task;
+  editing?: boolean;
 }) => {
   const [descLength, setDescLength] = useState<number>(
     props.defaultValues?.description?.length || 0
@@ -55,10 +56,16 @@ const FormTask = (props: {
     } catch (e) {
       console.error(e);
       setError("root", {
-        message: `Error al agregar tarea. ${e}`,
+        message: `Error al enviar formulario. ${e}`,
       });
     }
   };
+
+  useEffect(() => {
+    reset(props.defaultValues);
+    setDescLength(props.defaultValues?.description?.length || 0);
+    setStatusSelec(props.defaultValues?.status || "pending");
+  }, [props.defaultValues, reset]);
 
   return (
     <Modal
@@ -83,6 +90,15 @@ const FormTask = (props: {
           Agregar Tarea
         </h1>
         <div className="grow w-full flex flex-col gap-4 text-xl p-4">
+          {props.editing === true ? (
+            <input
+              className="hidden"
+              {...register("id")}
+              value={props.defaultValues?.id}
+            />
+          ) : (
+            ""
+          )}
           <label className="font-mono text-2xl font-semibold">Titulo:</label>
           <input
             className="w-full bg-slate-700 p-4 rounded-2xl"
@@ -147,7 +163,6 @@ const FormTask = (props: {
                     })}
                     value={status}
                     className="hidden"
-                    defaultValue={props.defaultValues?.status}
                   />
                   <span
                     className={`px-4 py-2 font-mono brightness-75 text-xl rounded-xl transition-all ${
