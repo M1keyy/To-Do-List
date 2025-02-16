@@ -7,6 +7,7 @@ import { useState } from "react";
 import Modal from "./Modal";
 import FormTask from "./FormTasks";
 import useEditTask from "../hooks/useEditTask";
+import formatDate from "../utils/formatDate";
 
 const Card = (props: Task) => {
   const [openDelete, setOpenDelete] = useState<boolean>(false);
@@ -55,10 +56,10 @@ const Card = (props: Task) => {
         </div>
         <div className="text-end font-semibold">
           <div>
-            <u>Creado:</u> {String(props.createdAt)}
+            <u>Creado:</u> {formatDate(props.createdAt)}
           </div>
           <div>
-            <u>Última actualización:</u> {String(props.updatedAt)}
+            <u>Última actualización:</u> {formatDate(props.updatedAt)}
           </div>
         </div>
       </div>

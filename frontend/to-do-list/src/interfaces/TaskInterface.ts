@@ -3,8 +3,8 @@ export default interface Task {
   title: string;
   description?: string;
   status: status;
-  createdAt: Date;
-  updatedAt?: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export type status = "pending" | "in-progress" | "completed";
