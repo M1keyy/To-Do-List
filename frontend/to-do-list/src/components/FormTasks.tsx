@@ -27,6 +27,12 @@ const FormTask = (props: {
     pending: "bg-red-600",
   };
 
+  const statusNames: Record<string, string> = {
+    completed: "Completado",
+    "in-progress": "En progreso",
+    pending: "Pendiente",
+  };
+
   const [statusSelec, setStatusSelec] = useState<string>("pending");
 
   const {
@@ -181,7 +187,7 @@ const FormTask = (props: {
                     }`}
                     onClick={() => setStatusSelec(status)}
                   >
-                    {status}
+                    {statusNames[status]}
                   </span>
                 </label>
               ))}

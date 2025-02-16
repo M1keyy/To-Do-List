@@ -1,4 +1,4 @@
-import Task from "../interfaces/TaskInterface";
+import Task, { status } from "../interfaces/TaskInterface";
 import IconButton from "./IconButton";
 import { FaEdit } from "react-icons/fa";
 import { AiFillDelete } from "react-icons/ai";
@@ -19,6 +19,12 @@ const Card = (props: Task) => {
     "in-progress": "bg-yellow-400 text-slate-800",
     pending: "bg-red-600",
   };
+
+  const statusNames: Record<status, string> = {
+    completed: "Completado",
+    "in-progress": "En progreso",
+    pending: "Pendiente",
+  }
 
   return (
     <div className="rounded-xl bg-slate-800 shadow shadow-gray-800 p-8 w-full">
@@ -45,7 +51,7 @@ const Card = (props: Task) => {
             statusStyles[props.status]
           }`}
         >
-          {props.status}
+          {statusNames[props.status]}
         </div>
         <div className="text-end font-semibold">
           <div>
