@@ -10,6 +10,7 @@ const sequelize = new Sequelize({
   password: process.env.DB_PASS,
   host: process.env.DB_HOST,
   dialect: "postgres",
+  timezone: "-08:00",
   models: [Task],
   logging: false,
 });

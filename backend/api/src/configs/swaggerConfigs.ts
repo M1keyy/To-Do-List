@@ -5,7 +5,7 @@ const swaggerDefinition = {
   info: {
     title: "Documentación API To-Do List",
     version: "1.0.0",
-    description: "Esta API es la encargada de realizar las operaciones CRUD entre nuestra aplicación To-Do List y la base de datos de posgreDB.",
+    description: "Esta API es la encargada de realizar las operaciones CRUD entre nuestra aplicación To-Do List y la base de datos de posgreDB. Se utilizó Express y Typescript para el API, Sequelize como ORM para la base de datos PosgreSQL.",
   },
 };
 

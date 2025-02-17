@@ -12,7 +12,7 @@ const app: Express = express();
 const PORT: string = process.env.PORT || "8080";
 app.use(
   cors({
-    origin: process.env.CONSUMER,
+    origin: [process.env.CONSUMER || "", `${process.env.DB_HOST}:${process.env.PORT}`],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
@@ -29,6 +29,6 @@ app.use("/", taskRoutes);
 sequelize.sync({ alter: true }).then(() => {
   console.log("Base de datos conectada 🚀");
   app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    console.log(`Servidor corriendo en http://${process.env.DB_HOST}:${process.env.PORT} o http://localhost:${PORT}`);
   });
 });
