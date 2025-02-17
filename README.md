@@ -87,7 +87,7 @@ Si el proyecto está corriendo, podrás acceder a la documentación completa (**
 
 
 ### Frontend
-- `/to-do-list` -> contiene todo el backend.
+- `/to-do-list` -> contiene todo el frontend.
   - `/node_modules` -> contiene los módulos de node.
   - `/public` -> contiene archivos estáticos.
   - `/src` -> contiene el código fuente.
