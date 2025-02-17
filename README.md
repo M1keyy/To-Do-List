@@ -19,8 +19,8 @@ Aplicación web para gestionar tareas en un To-Do List, desarrollada con:
 ### 1.- **Clonar el repositorio**
 Clona este repositorio en tu máquina local:
 ```
-git clone https://github.com/tu-usuario/tu-repo.git
-cd tu-repo
+git clone https://github.com/M1keyy/To-Do-List.git
+cd To-Do-List
 ```
 ### 2.- **Instalar las dependencias**
 Una vez que estés en el projecto instala todas las dependencias. Para esto puedes usar dos terminales, una en *'/backend/api'* y la otra en *'/frontend/to-do-list'*. En ambas ejecutarás el siguiente comando:
